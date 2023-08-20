@@ -1,5 +1,6 @@
 ﻿using System.Text;
 using System.Text.RegularExpressions;
+using System.Transactions;
 
 namespace Hometask9
 {
@@ -7,6 +8,9 @@ namespace Hometask9
     {
         static void Main(string[] args)
         {
+            Console.OutputEncoding = Encoding.Unicode;
+            Console.InputEncoding = Encoding.Unicode;
+
             // Task 1
             string word = "word";
             Console.WriteLine(word[2] + "\n");
@@ -74,8 +78,56 @@ namespace Hometask9
                 sum += number;
             }
             Console.WriteLine("Sum = " + sum);
-            Console.WriteLine(numbers2.Max());
+            Console.WriteLine(numbers2.Max() + "\n");
 
+            // Task 10
+            string text5 = "Apple Bus Bicycle";
+            StringBuilder uppercaseLetters = new StringBuilder();
+            foreach (char c in text5)
+            {
+                if (char.IsUpper(c) && uppercaseLetters.ToString().IndexOf(c) == -1)
+                {
+                    uppercaseLetters.Append(c + " ");
+                }
+            }
+            Console.WriteLine(uppercaseLetters);
+
+            // Task 11
+            string[] myWords = new string[10];
+            Console.WriteLine("\nEnter 10 words.");
+
+            for (int i = 0; i < myWords.Length; i++)
+            {
+                Console.Write($"Enter word #{i+1}: ");
+                myWords[i] = Console.ReadLine();
+            }
+
+            Console.WriteLine("\nYour words:");
+            foreach (string s in myWords)
+            {
+                Console.WriteLine(s);
+            }
+            Console.WriteLine();
+
+            // Task 12
+            string text6 = "mama myla ramu";
+            string[] text6Words = text6.Split(' ');
+            for (int i = text6Words.Length - 1; i >= 0; i--)
+            {
+                Console.Write(text6Words[i] + " ");
+            }
+
+            // Task 13
+            string sentence = "Над ринком кобзар надухнався.";
+
+            string[] wordss = sentence.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+
+            int wordsStarting = wordss.Count(word => word.StartsWith("н", StringComparison.OrdinalIgnoreCase));
+            int wordsEnding = wordss.Count(word => word.EndsWith("р", StringComparison.OrdinalIgnoreCase));
+
+            Console.WriteLine("\n\n\"" + sentence + "\"");
+            Console.WriteLine($"Кількість слів, що починаються з 'н': {wordsStarting}");
+            Console.WriteLine($"Кількість слів, які закінчуються на 'р': {wordsEnding}");
 
 
 
